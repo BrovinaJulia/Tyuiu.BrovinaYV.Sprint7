@@ -57,17 +57,14 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             var dataGridView = sender as DataGridView;
             if (dataGridView != null)
             {
-                // Get the row index in the correct format (e.g., "1", "2", etc.)
+                
                 string rowIndex = (e.RowIndex + 1).ToString();
 
-                // Determine the display size based on the row index string
                 SizeF textSize = e.Graphics.MeasureString(rowIndex, dataGridView.Font);
 
-                // Determine where to draw the text on the row header
                 int rowIndexX = Math.Max(0, e.RowBounds.Left + (dataGridView.RowHeadersWidth - (int)textSize.Width) / 2);
                 int rowIndexY = e.RowBounds.Top + (dataGridView.RowTemplate.Height - (int)textSize.Height) / 2;
 
-                // Draw the row index
                 e.Graphics.DrawString(rowIndex, dataGridView.Font, SystemBrushes.ControlText, rowIndexX, rowIndexY);
             }
         }
@@ -105,13 +102,13 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
 
         private void dataGridViewMain_BYV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            int rowCount = ((DataGridView)sender).RowCount;
+            int rowCount = ((DataGridView)sender).RowCount-1;
             this.textBoxEmployers_BYV.Text = rowCount.ToString();
         }
 
         private void dataGridViewMain_BYV_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            int rowCount = ((DataGridView)sender).RowCount;
+            int rowCount = ((DataGridView)sender).RowCount-1;
             this.textBoxEmployers_BYV.Text = rowCount.ToString();
         }
 
@@ -130,6 +127,122 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
                 }
             }
             this.chartMain_BYV.Series.Add(series);
+        }
+        public void SortDataGridViewColumn(DataGridView dataGridView, string columnName, bool ascending)
+        {
+            if (dataGridView.Columns.Contains(columnName))
+            {
+                dataGridView.Sort(dataGridView.Columns[columnName], ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
+            }
+            else
+            {
+                MessageBox.Show($"Столбец '{columnName}' не найден в таблице.");
+            }
+        }
+
+        public void FilterDataGridView(DataTable dataTable, string columnName, string filterValue)
+        {
+            if (dataTable.Columns.Contains(columnName))
+                dataTable.DefaultView.RowFilter = string.Format("Convert([{0}], System.String) LIKE '%{1}%'", columnName, filterValue);
+        }
+
+        private void textBoxFilter_BYV_TextChanged(object sender, EventArgs e)
+        {
+          
+                string column_name = comboBoxFilter_BYV.Text;
+                string filter_value = comboBoxFilter_BYV.Text;
+                DataTable dataTable = (DataTable)dataGridViewMain_BYV.DataSource;
+                FilterDataGridView(dataTable, column_name, filter_value);
+
+            
+        }
+
+        private void ToolStripMenuItemExit_BYV_Click(object sender, EventArgs e)
+        {
+          DialogResult result = MessageBox.Show("Вы точно хотите закрыть программу? Все несохраненные данные будут утеряны.", "Предупреждение", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else { }
+        }
+
+        private void ToolStripMenuNew_BYV_Click(object sender, EventArgs e)
+        {
+            DataService ds = new DataService();
+            this.dataGridViewMain_BYV.DataSource = ds.CreateEmptyTable();
+        }
+
+        private void ToolStripMenuOpen_BYV_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "%HOMEPATH%";  
+                openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*"; 
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    path = openFileDialog.FileName;
+                    ds.LoadCsvDataToDataGridView(openFileDialog.FileName, this.dataGridViewMain_BYV);
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+        }
+
+        private void ToolStripMenuSave_BYV_Click(object sender, EventArgs e)
+        {
+            if (path == string.Empty)
+            {
+                ToolStripMenuSave_BYV_Click(sender, e);
+                return;
+            }
+            ds.SaveDataGridViewToCsv(path, this.dataGridViewMain_BYV);
+        }
+
+        private void КакToolStripMenuSaveAs_BYV_Click(object sender, EventArgs e)
+        {
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = "%HOMEPATH%"; 
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*"; 
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.DefaultExt = "csv"; 
+                saveFileDialog.AddExtension = true; 
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ds.SaveDataGridViewToCsv(saveFileDialog.FileName, this.dataGridViewMain_BYV);
+                    path = saveFileDialog.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        private void textBoxFind_BYV_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb != null)
+            {
+                string currentText = tb.Text;
+                ds.HighlightRowsWithSearchString(this.dataGridViewMain_BYV, currentText);
+            }
+        }
+
+        private void ToolStripMenuInfo_BYV_Click(object sender, EventArgs e)
+        {
+            FormAbout formabout = new FormAbout();
+            formabout.ShowDialog();
         }
     }
 }

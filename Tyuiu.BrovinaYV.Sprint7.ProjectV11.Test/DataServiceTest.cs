@@ -27,7 +27,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11.Test
                 }
             }
 
-            // Проверка
+            
             Assert.AreEqual(9, lineCount); // Предполагаемое количество строк: 14
         }
     }

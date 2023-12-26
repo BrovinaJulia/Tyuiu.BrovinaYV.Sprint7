@@ -19,10 +19,10 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11.Lib
 
             using (var reader = new StreamReader(filePath))
             {
-                // Пропускаем заголовок
+
                 reader.ReadLine();
 
-                // Считаем оставшиеся строки
+
                 while (reader.ReadLine() != null)
                 {
                     lineCount++;
@@ -55,7 +55,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11.Lib
                     DataRow dr = dataTable.NewRow();
                     for (int i = 0; i < headers.Length; i++)
                     {
-                        // Convert Unix timestamp to DateTime for the 7th column (index 6)
+                        //  конвертация DateTime в Unix timestamp для 7-го столбца (индекс 6)
                         if (i == 7)
                         {
                             double timestamp = 0.0;
@@ -109,7 +109,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11.Lib
         {
             using (StreamWriter sw = new StreamWriter(filePath, false, new UTF8Encoding(true)))
             {
-                // Write headers
+                //заголовки
                 for (int i = 0; i < dataGridView.Columns.Count; i++)
                 {
                     sw.Write(dataGridView.Columns[i].HeaderText);
@@ -118,14 +118,14 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11.Lib
                 }
                 sw.WriteLine();
 
-                // Write data
+                //данные
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
                     if (!row.IsNewRow)
                     {
                         for (int i = 0; i < dataGridView.Columns.Count; i++)
                         {
-                            if (i == 7) // Convert DateTime to Unix timestamp for the 7th column (index 6)
+                            if (i == 7) // конвертация DateTime в Unix timestamp для 7-го столбца (индекс 6)
                             {
                                 if (row.Cells[i].Value == null)
                                     continue;
@@ -150,4 +150,5 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11.Lib
         }
     }
 }
+
 
