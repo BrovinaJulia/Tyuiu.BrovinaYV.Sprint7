@@ -48,6 +48,8 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.panelLeft_BYV = new System.Windows.Forms.Panel();
             this.splitter_BYV = new System.Windows.Forms.Splitter();
             this.groupBoxData_BYV = new System.Windows.Forms.GroupBox();
+            this.textBoxFind_BYV = new System.Windows.Forms.TextBox();
+            this.labelFind_BYV = new System.Windows.Forms.Label();
             this.textBoxEmployers_BYV = new System.Windows.Forms.TextBox();
             this.textBoxFilter_BYV = new System.Windows.Forms.TextBox();
             this.comboBoxFilter_BYV = new System.Windows.Forms.ComboBox();
@@ -83,8 +85,6 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.labelPhoneNumber_BYV = new System.Windows.Forms.Label();
             this.panelRight_BYV = new System.Windows.Forms.Panel();
             this.chartMain_BYV = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.labelFind_BYV = new System.Windows.Forms.Label();
-            this.textBoxFind_BYV = new System.Windows.Forms.TextBox();
             this.menuStripMain_BYV.SuspendLayout();
             this.panelTop_BYV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain_BYV)).BeginInit();
@@ -106,7 +106,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.ToolStripMenuInfo_BYV});
             this.menuStripMain_BYV.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain_BYV.Name = "menuStripMain_BYV";
-            this.menuStripMain_BYV.Size = new System.Drawing.Size(1142, 24);
+            this.menuStripMain_BYV.Size = new System.Drawing.Size(1511, 24);
             this.menuStripMain_BYV.TabIndex = 0;
             // 
             // ToolStripMenuItemFile_BYV
@@ -174,6 +174,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.ToolStripMenuHelp_BYV.Name = "ToolStripMenuHelp_BYV";
             this.ToolStripMenuHelp_BYV.Size = new System.Drawing.Size(68, 20);
             this.ToolStripMenuHelp_BYV.Text = "Помощь";
+            this.ToolStripMenuHelp_BYV.Click += new System.EventHandler(this.ToolStripMenuHelp_BYV_Click);
             // 
             // ToolStripMenuInfo_BYV
             // 
@@ -189,15 +190,16 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.panelTop_BYV.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelTop_BYV.Location = new System.Drawing.Point(0, 232);
             this.panelTop_BYV.Name = "panelTop_BYV";
-            this.panelTop_BYV.Size = new System.Drawing.Size(608, 476);
+            this.panelTop_BYV.Size = new System.Drawing.Size(839, 538);
             this.panelTop_BYV.TabIndex = 1;
             // 
             // dataGridViewMain_BYV
             // 
             this.dataGridViewMain_BYV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMain_BYV.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewMain_BYV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMain_BYV.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewMain_BYV.Name = "dataGridViewMain_BYV";
-            this.dataGridViewMain_BYV.Size = new System.Drawing.Size(599, 476);
+            this.dataGridViewMain_BYV.Size = new System.Drawing.Size(839, 538);
             this.dataGridViewMain_BYV.TabIndex = 0;
             this.dataGridViewMain_BYV.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewMain_BYV_RowPostPaint);
             this.dataGridViewMain_BYV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewMain_BYV_RowsAdded);
@@ -211,7 +213,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.panelLeft_BYV.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLeft_BYV.Location = new System.Drawing.Point(0, 24);
             this.panelLeft_BYV.Name = "panelLeft_BYV";
-            this.panelLeft_BYV.Size = new System.Drawing.Size(1142, 208);
+            this.panelLeft_BYV.Size = new System.Drawing.Size(1511, 208);
             this.panelLeft_BYV.TabIndex = 2;
             // 
             // splitter_BYV
@@ -248,10 +250,28 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             this.groupBoxData_BYV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxData_BYV.Location = new System.Drawing.Point(9, 3);
             this.groupBoxData_BYV.Name = "groupBoxData_BYV";
-            this.groupBoxData_BYV.Size = new System.Drawing.Size(1126, 206);
+            this.groupBoxData_BYV.Size = new System.Drawing.Size(1495, 206);
             this.groupBoxData_BYV.TabIndex = 1;
             this.groupBoxData_BYV.TabStop = false;
             this.groupBoxData_BYV.Text = "Ввод данных:";
+            // 
+            // textBoxFind_BYV
+            // 
+            this.textBoxFind_BYV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxFind_BYV.Location = new System.Drawing.Point(907, 163);
+            this.textBoxFind_BYV.Name = "textBoxFind_BYV";
+            this.textBoxFind_BYV.Size = new System.Drawing.Size(177, 20);
+            this.textBoxFind_BYV.TabIndex = 20;
+            this.textBoxFind_BYV.TextChanged += new System.EventHandler(this.textBoxFind_BYV_TextChanged);
+            // 
+            // labelFind_BYV
+            // 
+            this.labelFind_BYV.AutoSize = true;
+            this.labelFind_BYV.Location = new System.Drawing.Point(904, 147);
+            this.labelFind_BYV.Name = "labelFind_BYV";
+            this.labelFind_BYV.Size = new System.Drawing.Size(43, 13);
+            this.labelFind_BYV.TabIndex = 35;
+            this.labelFind_BYV.Text = "Найти";
             // 
             // textBoxEmployers_BYV
             // 
@@ -607,9 +627,9 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             // 
             this.panelRight_BYV.Controls.Add(this.chartMain_BYV);
             this.panelRight_BYV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight_BYV.Location = new System.Drawing.Point(608, 232);
+            this.panelRight_BYV.Location = new System.Drawing.Point(839, 232);
             this.panelRight_BYV.Name = "panelRight_BYV";
-            this.panelRight_BYV.Size = new System.Drawing.Size(534, 476);
+            this.panelRight_BYV.Size = new System.Drawing.Size(672, 538);
             this.panelRight_BYV.TabIndex = 3;
             // 
             // chartMain_BYV
@@ -625,33 +645,15 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartMain_BYV.Series.Add(series1);
-            this.chartMain_BYV.Size = new System.Drawing.Size(534, 476);
+            this.chartMain_BYV.Size = new System.Drawing.Size(672, 538);
             this.chartMain_BYV.TabIndex = 0;
             this.chartMain_BYV.Text = "chart1";
-            // 
-            // labelFind_BYV
-            // 
-            this.labelFind_BYV.AutoSize = true;
-            this.labelFind_BYV.Location = new System.Drawing.Point(904, 147);
-            this.labelFind_BYV.Name = "labelFind_BYV";
-            this.labelFind_BYV.Size = new System.Drawing.Size(43, 13);
-            this.labelFind_BYV.TabIndex = 35;
-            this.labelFind_BYV.Text = "Найти";
-            // 
-            // textBoxFind_BYV
-            // 
-            this.textBoxFind_BYV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxFind_BYV.Location = new System.Drawing.Point(907, 163);
-            this.textBoxFind_BYV.Name = "textBoxFind_BYV";
-            this.textBoxFind_BYV.Size = new System.Drawing.Size(177, 20);
-            this.textBoxFind_BYV.TabIndex = 20;
-            this.textBoxFind_BYV.TextChanged += new System.EventHandler(this.textBoxFind_BYV_TextChanged);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 708);
+            this.ClientSize = new System.Drawing.Size(1511, 770);
             this.Controls.Add(this.panelRight_BYV);
             this.Controls.Add(this.panelTop_BYV);
             this.Controls.Add(this.panelLeft_BYV);

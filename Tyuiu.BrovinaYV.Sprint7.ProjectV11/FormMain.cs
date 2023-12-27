@@ -19,6 +19,7 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
         public FormMain()
         {
             InitializeComponent();
+            this.FormClosing += FormMain_FormClosing;
         }
 
         private void buttonAddData_BYV_Click(object sender, EventArgs e)
@@ -149,10 +150,10 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
         private void textBoxFilter_BYV_TextChanged(object sender, EventArgs e)
         {
           
-                string column_name = comboBoxFilter_BYV.Text;
-                string filter_value = comboBoxFilter_BYV.Text;
+                string column = comboBoxFilter_BYV.Text;
+                string filter = textBoxFilter_BYV.Text;
                 DataTable dataTable = (DataTable)dataGridViewMain_BYV.DataSource;
-                FilterDataGridView(dataTable, column_name, filter_value);
+                FilterDataGridView(dataTable, column, filter);
 
             
         }
@@ -243,6 +244,29 @@ namespace Tyuiu.BrovinaYV.Sprint7.ProjectV11
         {
             FormAbout formabout = new FormAbout();
             formabout.ShowDialog();
+        }
+
+       
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                
+                DialogResult result = MessageBox.Show("Вы точно хотите закрыть программу? Все несохраненные данные будут утеряны.", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result != DialogResult.Yes)
+                {
+                    
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void ToolStripMenuHelp_BYV_Click(object sender, EventArgs e)
+        {
+            FormInfo forminfo = new FormInfo();
+            forminfo.ShowDialog();
         }
     }
 }
